@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt erstellen | PromptVibe</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="composer-panel" aria-labelledby="page-title">
+        <div class="panel-header">
+          <a class="back-link" href="#" aria-label="Zurueck zur Uebersicht">←</a>
+          <div>
+            <p class="eyebrow">Neuer Prompt</p>
+            <h1 id="page-title">Eingangsprompt verbessern</h1>
+          </div>
+        </div>
+
+        <form id="prompt-form" class="prompt-form" novalidate>
+          <label class="field field-large" for="inputPrompt">
+            <span>Eingangsprompt</span>
+            <textarea
+              id="inputPrompt"
+              name="inputPrompt"
+              rows="9"
+              placeholder="Beschreibe, was die KI fuer dich tun soll..."
+              aria-describedby="prompt-error"
+            ></textarea>
+          </label>
+          <p id="prompt-error" class="error-text" aria-live="polite"></p>
+
+          <div class="field-grid">
+            <label class="field" for="goal">
+              <span>Ziel</span>
+              <input id="goal" name="goal" type="text" placeholder="z.B. bessere Antwortqualitaet" />
+            </label>
+            <label class="field" for="audience">
+              <span>Zielgruppe</span>
+              <input id="audience" name="audience" type="text" placeholder="z.B. Schueler, Entwickler" />
+            </label>
+            <label class="field" for="tone">
+              <span>Ton</span>
+              <select id="tone" name="tone">
+                <option value="">Automatisch</option>
+                <option>Praezise</option>
+                <option>Professionell</option>
+                <option>Kreativ</option>
+                <option>Locker</option>
+              </select>
+            </label>
+            <label class="field" for="language">
+              <span>Sprache</span>
+              <select id="language" name="language">
+                <option>Deutsch</option>
+                <option>Englisch</option>
+                <option>Tuerkisch</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="submit-button" class="primary-button" type="submit">
+              Prompt verbessern
+            </button>
+            <button id="clear-button" class="secondary-button" type="button">
+              Leeren
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="result-panel" aria-labelledby="result-title">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">Mock-Auswertung</p>
+            <h2 id="result-title">Varianten & Score</h2>
+          </div>
+          <output id="best-score" class="score-pill" aria-live="polite">0</output>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          <p>Nach dem Absenden erscheinen hier 5 verbesserte Prompt-Varianten mit Score.</p>
+        </div>
+
+        <div id="loading-state" class="loading-state" hidden>
+          <span class="loader" aria-hidden="true"></span>
+          <p>Prompt wird analysiert...</p>
+        </div>
+
+        <div id="results" class="results" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
