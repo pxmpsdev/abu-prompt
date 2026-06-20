@@ -7,16 +7,8 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <section class="composer-panel" aria-labelledby="page-title">
-        <div class="panel-header">
-          <a class="back-link" href="#" aria-label="Zurueck zur Uebersicht">←</a>
-          <div>
-            <p class="eyebrow">PromptVibe</p>
-            <h1 id="page-title">Prompt abschicken</h1>
-          </div>
-        </div>
-
+    <main class="app-shell" data-state="idle">
+      <section class="composer-panel" aria-label="Prompt eingeben">
         <form id="prompt-form" class="prompt-form" novalidate>
           <div class="ai-input-box">
             <textarea
@@ -53,23 +45,59 @@
         </form>
       </section>
 
-      <section class="result-panel" aria-labelledby="result-title">
-        <div class="result-header">
-          <div>
-            <p class="eyebrow">Frontend Preview</p>
-            <h2 id="result-title">3 Prompt-Varianten</h2>
+      <section id="loader-view" class="loader-view" aria-label="Prompt wird vorbereitet" hidden>
+        <div class="flux-loader">
+          <div id="flux-label" class="flux-label" aria-hidden="true">Prompt lesen</div>
+          <div
+            id="flux-track"
+            class="flux-track"
+            role="progressbar"
+            aria-label="Loading"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-valuetext="0% - Prompt lesen"
+          >
+            <div id="flux-fill" class="flux-fill">
+              <span class="flux-sheen" aria-hidden="true"></span>
+            </div>
           </div>
-          <output id="best-score" class="score-pill" aria-live="polite">0</output>
         </div>
+      </section>
 
-        <div id="empty-state" class="empty-state">
-          <p>Nach dem Absenden erstellt PromptVibe automatisch 3 optimierte Varianten mit Score.</p>
-        </div>
+      <section id="planning-view" class="planning-view" aria-label="Prompt Varianten werden geplant" hidden>
+        <div class="planning-panel">
+          <div class="planning-orbit" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
 
-        <div id="loading-state" class="loading-state" hidden>
-          <span class="loader" aria-hidden="true"></span>
-          <p>Prompt wird analysiert...</p>
+          <div class="planning-copy">
+            <p class="eyebrow">AI Planning</p>
+            <h1>Varianten werden geplant</h1>
+          </div>
+
+          <ol class="planning-steps" aria-live="polite">
+            <li class="is-active">Prompt-Ziel erkennen</li>
+            <li>Struktur entwerfen</li>
+            <li>3 Varianten vorbereiten</li>
+            <li>Beste Option bewerten</li>
+          </ol>
         </div>
+      </section>
+
+      <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
+        <header class="result-header">
+          <div>
+            <p class="eyebrow">PromptVibe</p>
+            <h1 id="result-title">3 Prompt-Varianten</h1>
+          </div>
+          <div class="result-actions">
+            <output id="best-score" class="score-pill" aria-live="polite">0</output>
+            <button id="start-over-button" class="secondary-button" type="button">Neu</button>
+          </div>
+        </header>
 
         <div id="results" class="results" aria-live="polite"></div>
       </section>
