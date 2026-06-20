@@ -1,0 +1,17 @@
+.DS_Store
+
+# Local tooling and generated cache
+.tools/
+cache/
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.next/
+.vite/
+
+# Environment files
+.env
+.env.*
+!.env.example
