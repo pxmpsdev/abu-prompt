@@ -24,16 +24,18 @@ http://localhost:4173
 
 ## Uebergabe an Frontend
 
-Die Seite sammelt aktuell dieses Payload-Format:
+Die Seite nutzt einen AI-Input-Composer ohne Chatverlauf. Beim Absenden wird aktuell dieses Payload-Format erzeugt:
 
 ```js
 {
-  inputPrompt: string,
-  goal: string,
-  tone: string,
-  language: string,
-  audience: string
+  inputPrompt: string
 }
 ```
 
-Die Mock-Funktion in `app.js` erzeugt 5 Varianten mit Score. Sobald eine echte API existiert, kann `createMockVariants(payload)` durch einen API-Call ersetzt werden.
+Die Mock-Funktion in `app.js` erzeugt 3 Frontend-Varianten mit Score:
+
+- Targeted Fix
+- Technique Injection
+- Self-Reflection Rubric
+
+Sobald eine echte API existiert, kann `createMockVariants(payload)` durch einen API-Call ersetzt werden.
