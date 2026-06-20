@@ -38,7 +38,7 @@ export class AiPromptImprover implements PromptImprover {
       {
         role: "system",
         content:
-          "You are a precision prompt editor. Reply only with valid JSON. Keep the same language as the user's prompt. First identify exactly 10 short complaints or weaknesses in the original prompt. Then create exactly three improved prompt variants that stay close to the original prompt. The output prompt field must be a ready-to-use prompt, not an instruction to improve the prompt. Do not wrap the original in phrases like 'Improve this prompt', 'Revise this prompt', or 'Use a technique for'. Make small, high-value wording changes, replacements, and additions that improve clarity, specificity, visual quality, constraints, and composition while preserving the user's intent and structure. Score each variant from 0 to 100 and provide 5-star ratings. Mark exactly one winner."
+          "You are a precision prompt editor. Reply only with valid JSON. Return every field in English, including complaints, variant names, reasons, advice, and improved prompt text. First identify exactly 10 short complaints or weaknesses in the original prompt. Then create exactly three improved prompt variants that stay close to the original prompt. The output prompt field must be a ready-to-use prompt, not an instruction to improve the prompt. Do not wrap the original in phrases like 'Improve this prompt', 'Revise this prompt', or 'Use a technique for'. Make small, high-value wording changes, replacements, and additions that improve clarity, specificity, visual quality, constraints, and composition while preserving the user's intent and structure. Score each variant from 0 to 100 and provide 5-star ratings. Mark exactly one winner."
       },
       {
         role: "user",
@@ -63,7 +63,7 @@ Return this exact JSON shape:
   "variants": [
     {
       "id": "variant-1",
-      "name": "Variante A",
+      "name": "Variant A",
       "technique": "Targeted Fix",
       "isWinner": true,
       "baselineDelta": 0.2,
@@ -108,9 +108,9 @@ Rules:
 - complaints should be specific and useful, not generic filler.
 - variants must contain exactly 3 items.
 - ids must be variant-1 through variant-3.
-- variant-1 must be named "Variante A" with technique "Targeted Fix": keep the original structure and change only weak or vague words. This should feel like the original prompt, just cleaner.
-- variant-2 must be named "Variante B" with technique "Technique Injection": add only compact technique terms that fit the prompt type, for example stronger camera, lighting, composition, style, negative constraints, output format, or quality terms. Do not turn it into a meta-prompt.
-- variant-3 must be named "Variante C" with technique "Self-Reflection Rubric": add a short built-in quality check or final constraint, but keep it as a direct prompt. Do not ask the AI to explain the rubric.
+- variant-1 must be named "Variant A" with technique "Targeted Fix": keep the original structure and change only weak or vague words. This should feel like the original prompt, just cleaner.
+- variant-2 must be named "Variant B" with technique "Technique Injection": add only compact technique terms that fit the prompt type, for example stronger camera, lighting, composition, style, negative constraints, output format, or quality terms. Do not turn it into a meta-prompt.
+- variant-3 must be named "Variant C" with technique "Self-Reflection Rubric": add a short built-in quality check or final constraint, but keep it as a direct prompt. Do not ask the AI to explain the rubric.
 - scores and rubric scores must be integers from 0 to 100.
 - rating and rubric ratings must use the format "4.0/5.0" with one decimal place.
 - baselineDelta is a number compared to the input baseline, for example 0.2 or 0.7.
@@ -119,7 +119,7 @@ Rules:
 - every variant must include shareLabel exactly as "SHARE FOR FEEDBACK".
 - bestVariantId must match one variant id.
 - prompt must contain only the improved final prompt text.
-- prompt must not start with "Improve", "Revise", "Rewrite", "Ueberarbeite", "Verbessere", "Nutze", or similar meta instructions.
+- prompt must not start with "Improve", "Revise", "Rewrite", "Use", or similar meta instructions.
 - For image prompts, keep the subject, scene, mood, lens/style terms, and negative constraints. Improve by replacing a few words, tightening phrasing, and adding useful visual specificity.
 - Keep each prompt close to the original length. Do not write explanations inside the prompt field.
 - Do not include markdown fences or text outside JSON.

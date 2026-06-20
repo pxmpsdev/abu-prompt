@@ -21,7 +21,7 @@ const sampleResult: PromptImprovementResult = {
   variants: [
     {
       id: "variant-1",
-      name: "Variante A",
+      name: "Variant A",
       technique: "Targeted Fix",
       isWinner: false,
       baselineDelta: 0.2,
@@ -43,7 +43,7 @@ const sampleResult: PromptImprovementResult = {
     },
     {
       id: "variant-2",
-      name: "Variante B",
+      name: "Variant B",
       technique: "Technique Injection",
       isWinner: true,
       baselineDelta: 0.7,
@@ -65,7 +65,7 @@ const sampleResult: PromptImprovementResult = {
     },
     {
       id: "variant-3",
-      name: "Variante C",
+      name: "Variant C",
       technique: "Self-Reflection Rubric",
       isWinner: false,
       baselineDelta: 0.4,
@@ -129,9 +129,9 @@ describe("abu-prompt API", () => {
     expect(response.body.variants).toHaveLength(3);
     expect(response.body.complaints).toHaveLength(10);
     expect(response.body.variants.map((variant: { name: string }) => variant.name)).toEqual([
-      "Variante A",
-      "Variante B",
-      "Variante C"
+      "Variant A",
+      "Variant B",
+      "Variant C"
     ]);
     expect(response.body.bestVariantId).toBe("variant-2");
     expect(response.body.variants.filter((variant: { isWinner: boolean }) => variant.isWinner)).toHaveLength(1);

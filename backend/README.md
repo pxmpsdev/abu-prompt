@@ -4,9 +4,9 @@ REST backend for improving user prompts. It creates three direct, ready-to-use p
 
 The three variants use fixed improvement strategies:
 
-- Variante A: Targeted Fix
-- Variante B: Technique Injection
-- Variante C: Self-Reflection Rubric
+- Variant A: Targeted Fix
+- Variant B: Technique Injection
+- Variant C: Self-Reflection Rubric
 
 ## Setup
 
@@ -56,13 +56,13 @@ Request:
 
 Response contains the original prompt, three improved variants, scores, keyword analysis, and the best variant id.
 
-`variant.prompt` must be the final improved prompt text itself. It should not be a wrapper like "Improve this prompt..." or "Ueberarbeite diesen Prompt...".
+`variant.prompt` must be the final improved prompt text itself. It should not be a wrapper like "Improve this prompt..." or "Revise this prompt...".
 
 Each variant contains enough data for the frontend card:
 
 ```json
 {
-  "name": "Variante A",
+  "name": "Variant A",
   "technique": "Targeted Fix",
   "isWinner": true,
   "baselineDelta": 0.2,
