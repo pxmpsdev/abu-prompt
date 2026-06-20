@@ -3,6 +3,9 @@
 # Local tooling and generated cache
 .tools/
 cache/
+.codex-*.log
+*.log
+coverage/
 
 # Dependencies and build output
 node_modules/

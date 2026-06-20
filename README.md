@@ -4,16 +4,19 @@ Statische Hackathon-Demo fuer die Unterseite "Prompt erstellen".
 
 ## Lokal starten
 
-Direkt im Browser oeffnen:
+Backend starten:
 
-```txt
-index.html
+```powershell
+cd backend
+npm install
+npm run dev
 ```
 
-Oder mit Ruby als lokalem Server:
+Frontend starten:
 
-```sh
-ruby -run -e httpd . -p 4173
+```powershell
+cd ..
+npx vite --host 127.0.0.1 --port 4173 .
 ```
 
 Dann aufrufen:
@@ -24,18 +27,20 @@ http://localhost:4173
 
 ## Uebergabe an Frontend
 
-Die Seite nutzt einen AI-Input-Composer ohne Chatverlauf. Beim Absenden wird aktuell dieses Payload-Format erzeugt:
+Die Seite nutzt einen AI-Input-Composer ohne Chatverlauf. Beim Absenden ruft sie das Backend auf:
+
+```js
+POST http://localhost:3000/api/prompts/improve
+```
+
+Payload:
 
 ```js
 {
-  inputPrompt: string
+  prompt: string
 }
 ```
 
-Die Mock-Funktion in `app.js` erzeugt 3 Frontend-Varianten mit Score:
+Die API erzeugt 3 direkte Prompt-Varianten mit Score. `variant.prompt` ist der final nutzbare Prompt, nicht ein Text wie "Verbessere diesen Prompt...".
 
-- Targeted Fix
-- Technique Injection
-- Self-Reflection Rubric
-
-Sobald eine echte API existiert, kann `createMockVariants(payload)` durch einen API-Call ersetzt werden.
+Der Backend-Service erwartet einen OpenAI-kompatiblen AI-Endpunkt. Die Defaults stehen in `backend/.env.example`.
